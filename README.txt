@@ -30,5 +30,5 @@ Tools/framework used: netbeans,SQLite
 References: we will add latter
 
 Developers: 
-Maruf Mustar Moon (1811009642) [ CSE327 Section 1 ] {Product Owner}
-Shaif Hossain Emon (1811603642) ( [ CSE327 Section 1 ] {Scrum Master}
+Maruf Mustar Moon (1811009642) [ CSE327 Section 8 ] {Product Owner}
+Shaif Hossain Emon (1811603642) ( [ CSE327 Section 8 ] {Scrum Master}
