@@ -16,7 +16,7 @@ Main features:
 - search upcoming events
 - user can view calendar
 - user will get reminder for evevnts
-- user can download their writtings 
+- user can download their writtings .
 
 Operating system: Any
 
