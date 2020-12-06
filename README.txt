@@ -31,4 +31,8 @@ References: we will add latter
 
 Developers: 
 Maruf Mustar Moon (1811009642) [ CSE327 Section 8 ] {Product Owner}
+<<<<<<< HEAD
 Shaif Hossain Emon (1811603642) ( [ CSE327 Section 8 ] {Scrum Master}
+=======
+Shaif Hossain Emon (1811603642) ( [ CSE327 Section 8 ] {Scrum Master}
+>>>>>>> 9e272a2ae36fb3d3b9dfc09c02b3ccba4d083ac4
