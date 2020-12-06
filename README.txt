@@ -11,12 +11,12 @@ Main features:
 - user can set password
 - add personal thoughts
 - delete/update thoughts 
-- add upcoming events
-- delete/update thoughts 
+- add upcoming important events
+- delete/update events 
 - search upcoming events
-- view calendar
-- ...
-- ...
+- user can view calendar
+- user will get reminder for evevnts
+- user can download their writtings 
 
 Operating system: Any
 
