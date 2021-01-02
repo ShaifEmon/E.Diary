@@ -5,56 +5,19 @@
  */
 package UserInterface;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import net.proteanit.sql.DbUtils;
-import javax.swing.table.JTableHeader;
 
 /**
  *
  * @author Pasa
  */
-public class Thought extends javax.swing.JFrame {
+public class main_page extends javax.swing.JFrame {
 
     /**
-     * Creates new form Thought
+     * Creates new form main_form
      */
-    Connection con=null;
-    ResultSet rs=null;
-    PreparedStatement ps=null;
-    public Thought() {
+    public main_page() {
         initComponents();
-        
-        Table.setShowGrid(true);
-        Table.setRowHeight(60);
-        Table.setSelectionBackground(Color.lightGray);
-        Table.setFont(new Font("Tahoma",Font.PLAIN, 18));
-        
-        JTableHeader header= Table.getTableHeader();
-        header.setFont(new Font("Tahoma",Font.BOLD, 24));
-        
-        con = Sql_connection.Connect();
-        Update_table(); 
-        
-       
-    }
-    private void Update_table(){
-        try{
-           
-           String sql= "select * from thought";
-           ps=con.prepareStatement(sql);
-           rs=ps.executeQuery( );
-           Table.setModel(DbUtils.resultSetToTableModel(rs)); 
-        }catch(Exception ex){
-           JOptionPane.showMessageDialog(null, ex);
-            
-        }
-    
     }
 
     /**
@@ -67,37 +30,18 @@ public class Thought extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        Th_Back_Button = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        Th_Add_Button = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
+        Thought_Button = new javax.swing.JButton();
+        Event_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Thought");
+        setTitle("Main_page\n");
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        Th_Back_Button.setBackground(new java.awt.Color(0, 102, 102));
-        Th_Back_Button.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        Th_Back_Button.setForeground(new java.awt.Color(255, 255, 255));
-        Th_Back_Button.setText("Back");
-        Th_Back_Button.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Th_Back_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Th_Back_Button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Th_Back_ButtonMouseClicked(evt);
-            }
-        });
-        Th_Back_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Th_Back_ButtonActionPerformed(evt);
-            }
-        });
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(255, 51, 51));
@@ -132,65 +76,74 @@ public class Thought extends javax.swing.JFrame {
         });
 
         jTextField3.setBackground(new java.awt.Color(0, 102, 204));
-        jTextField3.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
+        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(255, 204, 0));
-        jTextField3.setText("                                                          Your Thought ");
+        jTextField3.setText("                                         E.Diary ");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
             }
         });
 
-        Th_Add_Button.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        Th_Add_Button.setText("Add New Thought\n");
-        Th_Add_Button.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Th_Add_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Th_Add_Button.addMouseListener(new java.awt.event.MouseAdapter() {
+        Thought_Button.setBackground(new java.awt.Color(0, 153, 255));
+        Thought_Button.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
+        Thought_Button.setText("Your Thoughts");
+        Thought_Button.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Thought_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Thought_Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Th_Add_ButtonMouseClicked(evt);
+                Thought_ButtonMouseClicked(evt);
             }
         });
-        Th_Add_Button.addActionListener(new java.awt.event.ActionListener() {
+        Thought_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Th_Add_ButtonActionPerformed(evt);
+                Thought_ButtonActionPerformed(evt);
             }
         });
 
-        Table.setGridColor(new java.awt.Color(204, 204, 0));
-        jScrollPane1.setViewportView(Table);
+        Event_Button.setBackground(new java.awt.Color(129, 207, 224));
+        Event_Button.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
+        Event_Button.setText("Your Events");
+        Event_Button.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Event_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Event_Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Event_ButtonMouseClicked(evt);
+            }
+        });
+        Event_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Event_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(Th_Back_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(29, 29, 29)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Th_Add_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96))
+            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
+            .addComponent(Thought_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Event_Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Th_Back_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(Th_Add_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(Event_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Thought_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 210, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,44 +161,45 @@ public class Thought extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jTextField1MouseClicked
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField2MouseClicked
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jTextField2MouseClicked
 
-    private void Th_Back_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Th_Back_ButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Th_Back_ButtonActionPerformed
-
-    private void Th_Back_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Th_Back_ButtonMouseClicked
-         main_page mainpage = new main_page();
-        mainpage.setVisible(true);
-        mainpage.pack();
+    private void Thought_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Thought_ButtonMouseClicked
+        Thought tht = new Thought();
+        tht.setVisible(true);
+        tht.pack();
         this.dispose();
-    }//GEN-LAST:event_Th_Back_ButtonMouseClicked
+    }//GEN-LAST:event_Thought_ButtonMouseClicked
 
-    private void Th_Add_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Th_Add_ButtonActionPerformed
+    private void Thought_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Thought_ButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Th_Add_ButtonActionPerformed
+    }//GEN-LAST:event_Thought_ButtonActionPerformed
 
-    private void Th_Add_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Th_Add_ButtonMouseClicked
-        Add_Thought add = new Add_Thought();
-        add.setVisible(true);
-        add.pack();
+    private void Event_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Event_ButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Event_ButtonActionPerformed
+
+    private void Event_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Event_ButtonMouseClicked
+        // TODO add your handling code here:
+        myproject myp = new myproject();
+        myp.setVisible(true);
+        myp.pack();
         this.dispose();
-    }//GEN-LAST:event_Th_Add_ButtonMouseClicked
+    }//GEN-LAST:event_Event_ButtonMouseClicked
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,30 +218,29 @@ public class Thought extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Thought.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(main_page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Thought.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(main_page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Thought.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(main_page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Thought.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(main_page.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Thought().setVisible(true);
+                new main_page().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Table;
-    private javax.swing.JButton Th_Add_Button;
-    private javax.swing.JButton Th_Back_Button;
+    private javax.swing.JButton Event_Button;
+    private javax.swing.JButton Thought_Button;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
