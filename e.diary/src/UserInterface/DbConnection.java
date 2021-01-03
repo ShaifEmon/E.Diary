@@ -19,7 +19,7 @@ public class DbConnection {
           try{
               
               Class.forName("org.sqlite.JDBC");
-              Connection conn=DriverManager.getConnection("jdbc:sqlite:D:\\emon\\fall 2020\\cse327\\Project\\e.diary\\Event.sqlite");
+              Connection conn=DriverManager.getConnection("jdbc:sqlite:Events.sqlite");
               System.out.println("connected");
               return conn;
               

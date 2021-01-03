@@ -21,7 +21,7 @@ public class Sql_connection {
     public static void insertDatabaseData(String date, String word) {
         String sql = "INSERT INTO thought (date,Thought) VALUES (?,?)";
  
-        try (Connection con = DriverManager.getConnection("jdbc:sqlite:D:\\emon\\fall 2020\\cse327\\Project\\e.diary\\thought.sqlite")) {
+        try (Connection con = DriverManager.getConnection("jdbc:sqlite:thought.sqlite")) {
             PreparedStatement pstmt = con.prepareStatement(sql);
             
             
@@ -41,7 +41,7 @@ public class Sql_connection {
     public static Connection Connect(){
         try{
         Class.forName("org.sqlite.JDBC");
-        Connection con=DriverManager.getConnection("jdbc:sqlite:D:\\emon\\fall 2020\\cse327\\Project\\e.diary\\thought.sqlite");
+        Connection con=DriverManager.getConnection("jdbc:sqlite:thought.sqlite");
         System.out.println("connect to database");
         return con;
         }catch(Exception ex){
