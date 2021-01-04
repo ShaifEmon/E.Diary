@@ -186,7 +186,7 @@ public class main_page extends javax.swing.JFrame {
     }//GEN-LAST:event_Thought_ButtonActionPerformed
 
     private void Event_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Event_ButtonActionPerformed
-        // TODO add your handling code here:
+                  
     }//GEN-LAST:event_Event_ButtonActionPerformed
 
     private void Event_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Event_ButtonMouseClicked
