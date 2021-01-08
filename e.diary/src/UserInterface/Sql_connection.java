@@ -18,15 +18,15 @@ public class Sql_connection {
      Connection con = null;
      
     
-    public static void insertDatabaseData(String date, String word) {
-        String sql = "INSERT INTO thought (date,Thought) VALUES (?,?)";
+    public static void insertDatabaseData(int ID,String date, String word) {
+        String sql = "INSERT INTO thought (ID,date,Thought) VALUES (?,?,?)";
  
         try (Connection con = DriverManager.getConnection("jdbc:sqlite:thought.sqlite")) {
             PreparedStatement pstmt = con.prepareStatement(sql);
             
-            
-            pstmt.setString(1,date);
-            pstmt.setString(2, word);
+            pstmt.setInt(1,ID);
+            pstmt.setString(2,date);
+            pstmt.setString(3, word);
             
             pstmt.executeUpdate();
             

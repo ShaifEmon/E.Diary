@@ -75,6 +75,7 @@ public class main_page extends javax.swing.JFrame {
             }
         });
 
+        jTextField3.setEditable(false);
         jTextField3.setBackground(new java.awt.Color(0, 102, 204));
         jTextField3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(255, 204, 0));

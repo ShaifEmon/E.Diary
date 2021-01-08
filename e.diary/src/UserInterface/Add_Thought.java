@@ -5,6 +5,7 @@
  */
 package UserInterface;
 
+import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -227,12 +228,13 @@ public class Add_Thought extends javax.swing.JFrame {
 
     private void AddTh_Save_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddTh_Save_ButtonMouseClicked
 
-        
+        Random rand = new Random();
+        int ID = rand.nextInt(5000) + 1;
         Sql_connection.Connect();
         
         if((!AddThought_Text.getText().isEmpty())&&
                 (Add_thoughtDate.getDate()!=null)){
-            Sql_connection.insertDatabaseData(((JTextField)Add_thoughtDate.
+            Sql_connection.insertDatabaseData(ID,((JTextField)Add_thoughtDate.
                     getDateEditor().getUiComponent()).getText(), 
                     AddThought_Text.getText());
             JOptionPane.showMessageDialog(this, "Word Has Been Added!");

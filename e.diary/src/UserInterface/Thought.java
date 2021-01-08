@@ -6,10 +6,12 @@
 package UserInterface;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
@@ -32,7 +34,7 @@ public class Thought extends javax.swing.JFrame {
         
         Table.setShowGrid(true);
         Table.setRowHeight(60);
-        Table.setSelectionBackground(Color.lightGray);
+        Table.setSelectionBackground(Color.blue);
         Table.setFont(new Font("Tahoma",Font.PLAIN, 18));
         
         JTableHeader header= Table.getTableHeader();
@@ -74,6 +76,7 @@ public class Thought extends javax.swing.JFrame {
         Th_Add_Button = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Thought");
@@ -131,10 +134,11 @@ public class Thought extends javax.swing.JFrame {
             }
         });
 
+        jTextField3.setEditable(false);
         jTextField3.setBackground(new java.awt.Color(0, 102, 204));
-        jTextField3.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
+        jTextField3.setFont(new java.awt.Font("Tahoma", 2, 36)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(255, 204, 0));
-        jTextField3.setText("                                                          Your Thought ");
+        jTextField3.setText("                                     Your Thought ");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -159,6 +163,16 @@ public class Thought extends javax.swing.JFrame {
         Table.setGridColor(new java.awt.Color(204, 204, 0));
         jScrollPane1.setViewportView(Table);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButton1.setText("Delete");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -174,7 +188,9 @@ public class Thought extends javax.swing.JFrame {
             .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(87, 87, 87)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Th_Add_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(96, 96, 96))
         );
@@ -186,11 +202,13 @@ public class Thought extends javax.swing.JFrame {
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Th_Back_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(Th_Add_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Th_Add_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
 
@@ -248,6 +266,31 @@ public class Thought extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_Th_Add_ButtonMouseClicked
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        if(Table.getSelectedRowCount()==1){
+            int rw= Table.getSelectedRow();
+            String data=Table.getModel().getValueAt(rw,2).toString();
+           try{
+            int check=JOptionPane.showConfirmDialog((Component)null,"Do you want to delete? ","Delete",JOptionPane.YES_NO_OPTION);
+            if(check==0){
+            String sql= "DELETE FROM thought where ID="+data;
+            ps=con.prepareStatement(sql);
+            ps.execute( );
+            Update_table();
+            }
+            }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,ex);
+            }
+        }else{
+            if(Table.getSelectedRowCount()==0){
+            JOptionPane.showMessageDialog(null,"No row selected");
+            }else
+             JOptionPane.showMessageDialog(null,"select one row");   
+                
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -287,6 +330,7 @@ public class Thought extends javax.swing.JFrame {
     private javax.swing.JTable Table;
     private javax.swing.JButton Th_Add_Button;
     private javax.swing.JButton Th_Back_Button;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
