@@ -272,13 +272,15 @@ public class Thought extends javax.swing.JFrame {
             int rw= Table.getSelectedRow();
             String data=Table.getModel().getValueAt(rw,2).toString();
            try{
-            int check=JOptionPane.showConfirmDialog((Component)null,"Do you want to delete? ","Delete",JOptionPane.YES_NO_OPTION);
+            int check=JOptionPane.showConfirmDialog((Component)null,
+                    "Do you want to delete? ","Delete",JOptionPane.YES_NO_OPTION);
             if(check==0){
             String sql= "DELETE FROM thought where ID="+data;
             ps=con.prepareStatement(sql);
             ps.execute( );
             Update_table();
             }
+            con.close();
             }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,ex);
             }
@@ -316,6 +318,7 @@ public class Thought extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Thought.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
