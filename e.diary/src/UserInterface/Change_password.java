@@ -7,7 +7,6 @@ package UserInterface;
 
 import java.awt.Component;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -239,10 +238,9 @@ public class Change_password extends javax.swing.JFrame {
             
         ResultSet rs;
         PreparedStatement ps;
+        Connection con=passConnection.Connect();
         try{
             String sql = "SELECT password FROM `pass`";
-            Class.forName("org.sqlite.JDBC");
-            Connection con=DriverManager.getConnection("jdbc:sqlite:pass.sqlite");
             ps=con.prepareStatement(sql);
             rs=ps.executeQuery();
             if(old_pass.getText().equals(rs.getString("password"))){
@@ -266,10 +264,11 @@ public class Change_password extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please Fill The Fields!");
              }
           }else{
-            JOptionPane.showMessageDialog(this, "Please Fill The Fields!");
+            JOptionPane.showMessageDialog(this, "Old password is not correct");
             }
-        }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Change_password.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (SQLException ex) {
+            Logger.getLogger(Change_password.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
         
         

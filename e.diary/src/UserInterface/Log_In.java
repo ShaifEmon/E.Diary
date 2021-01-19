@@ -6,7 +6,6 @@
 package UserInterface;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -133,11 +132,11 @@ public class Log_In extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(30, 30, 30)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(182, 182, 182)
+                .addGap(183, 183, 183)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -147,9 +146,9 @@ public class Log_In extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(32, 32, 32)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 94, Short.MAX_VALUE))
+                .addGap(0, 63, Short.MAX_VALUE))
         );
 
         jTextField5.setEditable(false);
@@ -189,14 +188,11 @@ public class Log_In extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                        .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(PasswordField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addComponent(LogInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61)
@@ -228,31 +224,30 @@ public class Log_In extends javax.swing.JFrame {
         ResultSet rs;
         PreparedStatement ps;
         String password = String.valueOf(PasswordField.getPassword());
-        
+        Connection con=passConnection.Connect();
         String sql = "SELECT password FROM `pass`";
         
        try {
-           Class.forName("org.sqlite.JDBC");
-            try (Connection con = DriverManager.getConnection("jdbc:sqlite:pass.sqlite")) {
-                ps=con.prepareStatement(sql);
-                rs=ps.executeQuery();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            if(!password.isEmpty()){ 
                 
-                
-                if(password.equals(rs.getString("password")))
-                {
-                    
+                 if(password.equals(rs.getString("password")))
+                    {
                     main_page main = new main_page();
                     main.setVisible(true);
                     main.pack();
                     this.dispose();
                     
+                    
                 }else{
-                    JOptionPane.showMessageDialog(null, "Invalid Password","Login Error",1);
+                    JOptionPane.showMessageDialog(null, "Invalid Password",
+                            "Login Error",1);
                 }
+            }else{
+                JOptionPane.showMessageDialog(null, "Password Fild empty");
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } catch (ClassNotFoundException ex) {
+            }catch (SQLException ex) {
             Logger.getLogger(Log_In.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_LogInButtonMouseClicked
@@ -271,31 +266,26 @@ public class Log_In extends javax.swing.JFrame {
 
         ResultSet rs;
         PreparedStatement ps;
+         Connection con=passConnection.Connect();
         String sql = "SELECT password FROM `pass`";
         try {
-           Class.forName("org.sqlite.JDBC");
-            try (Connection con = DriverManager.getConnection("jdbc:sqlite:pass.sqlite")) {
-                ps=con.prepareStatement(sql);
-                rs=ps.executeQuery();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
                 
-                 if(ps.executeQuery().isClosed()){
-                    Register rg = new Register();
-                    rg.setVisible(true);
-                    rg.pack();
-                    this.dispose();
+            if(ps.executeQuery().isClosed()){
+                Register rg = new Register();
+                rg.setVisible(true);
+                rg.pack();
+                this.dispose();
                  
-                 } else{
-                     Change_password sp = new Change_password();
-                    sp.setVisible(true);
-                    sp.pack();
-                    this.dispose();
+            } else{
+                Change_password sp = new Change_password();
+                sp.setVisible(true);
+                sp.pack();
+                this.dispose();
                     
-                 }
-                
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } catch (ClassNotFoundException ex) {
+                }
+        }catch (SQLException ex) {
             Logger.getLogger(Log_In.class.getName()).log(Level.SEVERE, null, ex);
         }
         

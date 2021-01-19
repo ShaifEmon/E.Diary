@@ -28,26 +28,22 @@ public class passConnection {
             con.close();
            
             
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
       
       public static Connection Connect(){
           
-          try{
-              
-              Class.forName("org.sqlite.JDBC");
-              Connection con=DriverManager.getConnection("jdbc:sqlite:pass.sqlite");
-              System.out.println("connected");
-              return con;
-              
-        
-              }catch(ClassNotFoundException | SQLException e){
-                  
-                  JOptionPane.showMessageDialog(null, e);
-                  return null;
-              }
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection con=DriverManager.getConnection("jdbc:sqlite:pass.sqlite");
+            System.out.println("connected");
+            return con;
+        }catch(ClassNotFoundException | SQLException e){
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+            }
       }
 
 

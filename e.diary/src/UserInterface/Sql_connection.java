@@ -31,7 +31,7 @@ public class Sql_connection {
             pstmt.executeUpdate();
             
             System.out.println("Data Inserted!");
-            pstmt.close();
+            con.close();
            
             
         } catch (SQLException e) {

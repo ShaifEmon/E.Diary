@@ -51,8 +51,9 @@ public class Thought extends javax.swing.JFrame {
            String sql= "select * from thought";
            ps=con.prepareStatement(sql);
            rs=ps.executeQuery( );
-           Table.setModel(DbUtils.resultSetToTableModel(rs)); 
-        }catch(Exception ex){
+           Table.setModel(DbUtils.resultSetToTableModel(rs));
+           
+        }catch(SQLException ex){
            JOptionPane.showMessageDialog(null, ex);
             
         }
@@ -77,13 +78,17 @@ public class Thought extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        Update_Button = new javax.swing.JButton();
+        Search = new javax.swing.JTextField();
+        Search_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Thought");
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         Th_Back_Button.setBackground(new java.awt.Color(0, 102, 102));
         Th_Back_Button.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -165,11 +170,37 @@ public class Thought extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton1.setText("Delete");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
+            }
+        });
+
+        Update_Button.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Update_Button.setText("Update");
+        Update_Button.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Update_Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Update_ButtonMouseClicked(evt);
+            }
+        });
+
+        Search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SearchKeyReleased(evt);
+            }
+        });
+
+        Search_Button.setBackground(new java.awt.Color(0, 204, 204));
+        Search_Button.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Search_Button.setText("Search");
+        Search_Button.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Search_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Search_Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Search_ButtonMouseClicked(evt);
             }
         });
 
@@ -185,14 +216,22 @@ public class Thought extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
+            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(87, 87, 87)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
+                .addComponent(Update_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Th_Add_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96))
+                .addGap(79, 79, 79))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(Search_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(115, 115, 115))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,15 +240,27 @@ public class Thought extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Th_Back_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Th_Add_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
+                    .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Search_Button))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Update_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(2, 2, 2)))
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Th_Add_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -280,7 +331,7 @@ public class Thought extends javax.swing.JFrame {
             ps.execute( );
             Update_table();
             }
-            con.close();
+            
             }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,ex);
             }
@@ -293,6 +344,51 @@ public class Thought extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void SearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchKeyReleased
+       
+    }//GEN-LAST:event_SearchKeyReleased
+
+    private void Update_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Update_ButtonMouseClicked
+        // TODO add your handling code here:
+        Add_Thought add = new Add_Thought();
+        add.setVisible(true);
+        add.pack();
+        this.dispose();
+
+        try{
+            int row=Table.getSelectedRow();
+            String Data=(Table.getModel().getValueAt(row, 0).toString());
+            String sql="select *from thought where ID='"+Data+"' ";
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                
+            }
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+
+        }
+    }//GEN-LAST:event_Update_ButtonMouseClicked
+
+    private void Search_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Search_ButtonMouseClicked
+        // TODO add your handling code here:
+        try{
+              String sql="select *from thought where Thought like ?" ; 
+
+              ps=con.prepareStatement(sql);
+            
+              ps.setString(1, "%"+Search.getText()+"%");
+            
+              rs = ps.executeQuery();
+              Table.setModel(DbUtils.resultSetToTableModel(rs));
+              
+                
+          }catch(SQLException e){
+              JOptionPane.showMessageDialog(null, e);
+           }
+    }//GEN-LAST:event_Search_ButtonMouseClicked
+      
     /**
      * @param args the command line arguments
      */
@@ -330,9 +426,12 @@ public class Thought extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Search;
+    private javax.swing.JButton Search_Button;
     private javax.swing.JTable Table;
     private javax.swing.JButton Th_Add_Button;
     private javax.swing.JButton Th_Back_Button;
+    private javax.swing.JButton Update_Button;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -6,13 +6,6 @@
 package UserInterface;
 
 import java.awt.Component;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -219,21 +212,12 @@ public class Register extends javax.swing.JFrame {
             
         if((!passField.getText().isEmpty())){
             
-            JOptionPane.showConfirmDialog((Component)null,
-                    "Do you want to set this as your password? ","Set Password",
-                    JOptionPane.YES_NO_OPTION);
-            
-            
             passConnection.insertDatabaseData(passField.getText());
             JOptionPane.showMessageDialog(this, "Password saved");
+            
         }else{
             JOptionPane.showMessageDialog(this, "Please Fill The Fields!");
-        }
-        //}else{
-        //JOptionPane.showMessageDialog(this, "Please Fill The Fields!");
-        //}
-        
-        
+        }   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MouseClicked
